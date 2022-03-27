@@ -37,6 +37,9 @@ $product = new Product(1, 'Lettiera', 15);
                 
             </ul>
         </div>
+        <?php 
+            $customer->buy($product);
+        ?>
         <div>
             <h2>Dopo l'acquisto</h2>
             <ul>
