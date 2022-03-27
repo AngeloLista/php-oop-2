@@ -54,10 +54,10 @@ class Customer {
     }
     
     public function buy() {
-        if (!$this->credit_card->isExpired()) {
-            return 'Acquistato con successo';
-        };
-        return 'Impossibile effettuare l\'acquisto. La tua carta di credito è scaduta';
+        if ($this->credit_card->isExpired()) {
+            return 'Impossibile effettuare l\'acquisto. La tua carta è scaduta';
+        }
+        return 'Acquistato con successo';
     }
 }
 ?>
