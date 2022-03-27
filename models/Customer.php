@@ -30,7 +30,8 @@ class Customer {
         return $this->is_registered ? $this->discount = 0.20 : $this->discount = 0;
     }
 
-
+    
+    
     /**
      * Get the value of credit_card
      */ 
@@ -38,7 +39,7 @@ class Customer {
     {
         return $this->credit_card;
     }
-
+    
     /**
      * Set the value of credit_card
      *
@@ -48,8 +49,15 @@ class Customer {
     {
         if($credit_card instanceof CreditCard === false) return false;
         $this->credit_card = $credit_card;
-
+        
         return $this;
+    }
+    
+    public function buy() {
+        if (!$this->credit_card->isExpired()) {
+            return 'Acquistato con successo';
+        };
+        return 'Impossibile effettuare l\'acquisto. La tua carta di credito è scaduta';
     }
 }
 ?>
