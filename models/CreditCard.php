@@ -12,6 +12,13 @@ class CreditCard {
         $this->expire_date = $expire_date;
         $this->issuing_company = $issuing_company;
     }
+
+    public function isExpired() {
+        $expire_date = strtotime($this->expire_date);
+        $today_date = strtotime(date('d-m-Y'));
+        
+        return $expire_date < $today_date;
+    }
 }
 
 ?>
