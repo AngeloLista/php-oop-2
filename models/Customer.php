@@ -27,7 +27,7 @@ class Customer {
 
     // Se l'utente è registrato discount del 20%
     public function setDiscount() {
-        return $this->is_registered ? $this->discount = 0.20 : $this->discount = 0;
+        return $this->is_registered ? $this->discount = 0.20 : null;
     }
 
     
@@ -52,12 +52,22 @@ class Customer {
         
         return $this;
     }
+
+    public function getDiscountedPrice($product) {
+        $discount = $product->price * $this->discount;
+        $price = $product->price - $discount;
+        return $price;
+    }
     
-    public function buy() {
+    public function buy($product) {
         if ($this->credit_card->isExpired()) {
             return 'Impossibile effettuare l\'acquisto. La tua carta è scaduta';
+        } elseif ($product->price > $this->credit_card->balance) {
+            return 'Impossibile effettuare la transazione. Saldo insuffiente.';
+        } else {
+            $this->credit_card->balance -= $this->getDiscountedPrice($product);            
+            return 'Acquistato con successo';
         }
-        return 'Acquistato con successo';
     }
 }
 ?>
